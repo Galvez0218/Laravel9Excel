@@ -14,4 +14,51 @@ Extensión PHP  php_zlib habilitada
 -- Crear proyecto Laravel
 composer create-project --prefer-dist laravel/laravel laravel-excel
 
---
+-- Paso 2: configurar los detalles de la base de datos
+-- Paso 3: Instale un sitio web personalizado/paquete de Excel
+    composer require maatwebsite/excel
+
+    Si composer require falla en Laravel 9 debido a la  simple-cache dependencia, deberá especificar la  psr/simple-cache versión como  ^2.0 en su composer.json para satisfacer la dependencia de PhpSpreadsheet. Puede instalar ambos al mismo tiempo que:
+
+    composer require psr/simple-cache:^2.0 maatwebsite/excel
+
+-- si no funciona los composer
+-- AGREGAR AL composer.json el sgt codigo
+        "maatwebsite/excel": "^3.1",
+        "psr/simple-cache": "2.0"
+-- composer update
+    si no funciona, ejecutar lo sgt
+-- composer update --ignore-platform-req=ext-gd
+
+-- Registrar el servicio del complemento en proveedores y alias
+    Puede colocar el siguiente código dentro del  archivo config/app.php  .
+
+        'providers' => [
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        ],
+
+        'aliases' => [
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        ],
+
+-- Ejecute el proveedor, publique el comando y publique la configuración.
+
+    php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+
+
+-- Paso 4: generar datos falsos y migrar tabla
+    php artisan migrate
+    php artisan tinker
+    User::factory()->count(100)->create();
+
+-- Paso 5: Crea una ruta
+    use App\Http\Controllers\UserController;
+    Route::get('/file-import',[UserController::class,'importView'])->name('import-view');
+    Route::post('/import',[UserController::class,'import'])->name('import');
+    Route::get('/export-users',[UserController::class,'exportUsers'])->name('export-users');
+
+-- Paso 6: Crear clase de importación
+-- Paso 7: Crear clase de exportación
+-- Paso 8: Crear controlador
+-- Paso 9: Crear hoja / Vista / Ver archivos
+
