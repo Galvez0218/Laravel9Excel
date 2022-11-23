@@ -26,12 +26,11 @@ composer create-project --prefer-dist laravel/laravel laravel-excel
 -- AGREGAR AL composer.json el sgt codigo
         "maatwebsite/excel": "^3.1",
         "psr/simple-cache": "2.0"
--- composer update
-    si no funciona, ejecutar lo sgt
--- composer update --ignore-platform-req=ext-gd
+    composer update
+-- si no funciona, ejecutar lo sgt
+    composer update --ignore-platform-req=ext-gd
 
--- Registrar el servicio del complemento en proveedores y alias
-    Puede colocar el siguiente código dentro del  archivo config/app.php  .
+-- Registrar el servicio del complemento en proveedores y alias. Puede colocar el siguiente código dentro del  archivo config/app.php  .
 
         'providers' => [
         Maatwebsite\Excel\ExcelServiceProvider::class,
@@ -42,7 +41,6 @@ composer create-project --prefer-dist laravel/laravel laravel-excel
         ],
 
 -- Ejecute el proveedor, publique el comando y publique la configuración.
-
     php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
 
 
