@@ -1,0 +1,17 @@
+Requisitos
+PHP: ^8.0|^8.1
+Laravel: 9.0
+PhpHoja de cálculo: ^1.15
+Extensión PHP  php_zip habilitada
+Extensión PHP  php_xml habilitada
+Extensión PHP  php_gd2 habilitada
+Extensión PHP  php_iconv habilitada
+Extensión PHP  php_simplexml habilitada
+Extensión PHP  php_xmlreader habilitada
+Extensión PHP  php_zlib habilitada
+
+
+-- Crear proyecto Laravel
+composer create-project --prefer-dist laravel/laravel laravel-excel
+
+--
